@@ -1,0 +1,37 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+:root {
+  /* Paper / Ink Aesthetic */
+  --background: #F9F8F4; /* Warm off-white */
+  --foreground: #2D2D2D; /* Soft black */
+  --accent: #800020; /* Deep Burgundy (Oxford Blue/Red feel) */
+  --muted: #666666;
+  --border: #E5E5E5;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1a1a1a;
+    --foreground: #E5E5E5;
+    --accent: #E06C75; /* Softer accent for dark mode */
+    --muted: #A0A0A0;
+    --border: #333333;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
