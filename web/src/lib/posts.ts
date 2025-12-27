@@ -26,14 +26,29 @@ export function getPostSlugs() {
 }
 
 export function getPostBySlug(slug: string): Post {
-    const realSlug = slug.replace(/\.mdx$/, "");
+    const realSlug = decodeURIComponent(slug).replace(/\.mdx$/, "");
     const fullPath = path.join(postsDirectory, `${realSlug}.mdx`);
     const fileContents = fs.readFileSync(fullPath, "utf8");
     const { data, content } = matter(fileContents);
 
+    // Normalize date to string
+    let dateString = "";
+    if (data.date instanceof Date) {
+        dateString = data.date.toISOString().split("T")[0];
+    } else {
+        dateString = data.date ? String(data.date) : new Date().toISOString().split("T")[0];
+    }
+
+    // Ensure meta matches the interface
+    const meta: PostMeta = {
+        ...data,
+        title: data.title,
+        date: dateString,
+    } as PostMeta;
+
     return {
         slug: realSlug,
-        meta: data as PostMeta,
+        meta,
         content,
     };
 }
