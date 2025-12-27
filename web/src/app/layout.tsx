@@ -21,6 +21,8 @@ export const metadata: Metadata = {
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
+import Script from "next/script";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,6 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="km">
+      <head>
+        <Script src="https://identity.netlify.com/v1/netlify-identity-widget.js" />
+      </head>
       <body
         className={`${inter.variable} ${merriweather.variable} antialiased font-serif bg-background text-foreground flex flex-col min-h-screen`}
       >
