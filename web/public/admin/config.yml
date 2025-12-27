@@ -1,0 +1,25 @@
+# When running locally, use the local backend
+local_backend: true
+
+# Backend configuration
+backend:
+  name: git-gateway
+  branch: main
+
+# Media storage
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# Content collections
+collections:
+  - name: "posts"
+    label: "Posts"
+    folder: "posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "Tags", name: "tags", widget: "list", default: ["Essay"]}
+      - {label: "Body", name: "body", widget: "markdown"}

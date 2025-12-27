@@ -1,6 +1,13 @@
 import NextImage from "next/image";
 
-export function CustomImage({ src, alt, width, height, ...props }: React.ComponentProps<"img">) {
+interface CustomImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+    src?: string;
+    alt?: string;
+    width?: string | number;
+    height?: string | number;
+}
+
+export function CustomImage({ src, alt, width, height, ...props }: CustomImageProps) {
     return (
         <div className="my-8">
             <NextImage
