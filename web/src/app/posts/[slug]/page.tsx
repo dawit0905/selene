@@ -11,11 +11,13 @@ const components = {
 export async function generateStaticParams() {
     const posts = getAllPosts();
     return posts.map((post) => ({
-        slug: post.slug,
+        // Encode slug to handle non-ASCII characters (e.g. Korean)
+        slug: post.slug.split("/").map(part => encodeURIComponent(part)).join("/"),
     }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+    // Next.js 15: params must be awaited
     const { slug } = await params;
     const post = getPostBySlug(slug);
     return {
@@ -25,6 +27,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+    // Next.js 15: params must be awaited
     const { slug } = await params;
     const post = getPostBySlug(slug);
 
