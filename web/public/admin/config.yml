@@ -7,14 +7,14 @@ backend:
   branch: main
 
 # Media storage
-media_folder: "public/images/uploads"
+media_folder: "web/public/images/uploads"
 public_folder: "/images/uploads"
 
 # Content collections
 collections:
   - name: "posts"
     label: "Posts"
-    folder: "posts"
+    folder: "web/posts"
     create: true
     extension: "mdx"
     format: "frontmatter"
