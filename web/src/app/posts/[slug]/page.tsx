@@ -11,8 +11,7 @@ const components = {
 export async function generateStaticParams() {
     const posts = getAllPosts();
     return posts.map((post) => ({
-        // Encode slug to handle non-ASCII characters (e.g. Korean)
-        slug: post.slug.split("/").map(part => encodeURIComponent(part)).join("/"),
+        slug: post.slug,
     }));
 }
 
